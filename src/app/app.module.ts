@@ -65,6 +65,7 @@ import {MatTreeModule} from '@angular/material/tree';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { ToTndPipe } from './to-tnd.pipe';
 import { EditerProduitComponent } from './editer-produit/editer-produit.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -87,6 +88,7 @@ import { EditerProduitComponent } from './editer-produit/editer-produit.componen
     //MatFormFieldModule
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     FormsModule, 
     AppRoutingModule,

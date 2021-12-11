@@ -9,6 +9,16 @@ export class produit {
     private _stock: boolean,
     private _date: Date
   ) {}
+  /* 
+   _id: [123],
+      _libelle: ["testAJOUT"],
+      _description: ["descriptTest"],
+      _image: ["imageimage"],
+      _prix: [123],
+      _nbStock: [123],
+      _stock:[true],
+      _date:[this.date]
+      */
   public get id(): number {
     return this._id;
   }

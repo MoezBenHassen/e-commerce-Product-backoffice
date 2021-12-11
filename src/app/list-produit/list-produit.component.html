@@ -1,4 +1,5 @@
 <app-nav-menu>
+  
   <h2>Liste des articles</h2>
   <div id="searchBar">
   <mat-form-field class="searchBar">
@@ -12,6 +13,7 @@
     <span matSuffix> <mat-icon>search</mat-icon></span>
   </mat-form-field>
 </div>
+
   <table class=" table table-striped table-dark table-hover mat-elevation-z8">
     <tr>
       <th>Id</th>
@@ -26,19 +28,20 @@
 
       <th>Actions</th>
     </tr>
-    <ng-container *ngFor="let e of pr">
-      <tr
-        [hidden]="
-          !(e.libelle.toUpperCase().indexOf(LibelleArticle.toUpperCase()) != -1)
-        "
-      >
-        <td class="td">{{ e.id }}</td>
 
-        <td matBadge="{{ e.nbStock }}" matBadgePosition="above after">
-          <img src="{{ e.image }}" alt="image" />
+    <ng-container *ngFor="let e of products">
+      <tr
+      [hidden]="
+      !(e._libelle.toUpperCase().indexOf(LibelleArticle.toUpperCase()) != -1)
+    "
+      >
+        <td class="td">{{ e._id }}</td>
+
+        <td matBadge="{{ e._nbStock }}" matBadgePosition="above after">
+          <img src="{{ e._image }}" alt="image" />
         </td>
-        <td>{{ e.libelle }}</td>
-        <td>{{ e.prix | currency: "€" }}</td>
+        <td>{{ e._libelle }}</td>
+        <td>{{ e._prix | currency: "€" }}</td>
 
         <!--Infos Section-->
         <!-- Snack Bar Solution
@@ -64,20 +67,20 @@
             </mat-expansion-panel-header>
             <p>
               <mat-icon class="mat-iconDsize">description</mat-icon>
-              <em> {{ e.description }}</em>
+              <em> {{ e._description }}</em>
             </p>
             <p>
               <mat-icon class="mat-iconDsize">calendar_today</mat-icon>
-              <em> {{ e.date | date: "d MMM y" }} </em>
+              <em> {{ e._date | date: "d MMM y" }} </em>
             </p>
             <p>
               <mat-icon class="mat-iconDsize">attach_money</mat-icon>
-              <em> {{ e.prix }}€ ({{ e.prix | toTnd | number }} tnd)</em>
+              <em> {{ e._prix }}€ ({{ e.prix | toTnd | number }} tnd)</em>
             </p>
             <div *ngIf="e.stock; else BlocElse">
               <mat-icon class="mat-iconDsize " [ngStyle]="{ color: 'green' }"
                 >check_circle</mat-icon
-              >En Stock ({{ e.nbStock }})
+              >En Stock ({{ e._nbStock }})
             </div>
             <ng-template #BlocElse>
               <mat-icon
@@ -112,7 +115,7 @@
             mat-button
             aria-label="Modify"
             matTooltip="Edit infos"
-            [routerLink]="['/EditProduit', e.id]"
+            [routerLink]="['/EditProduit', e._id]"
           >
             <mat-icon>edit</mat-icon>
           </button>
@@ -121,8 +124,8 @@
             aria-label="Delete"
             matTooltip="Delete"
             matTooltipClass="example-tooltip-red"
-            (click)="Delete(e.id)"
-            (click)="openSnackBar(e.id)"
+            (click)="deleteProduct(e._id)"
+            (click)="openSnackBar(e._id)"
           >
             <mat-icon>delete</mat-icon>
           </button>

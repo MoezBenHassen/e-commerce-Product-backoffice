@@ -29,6 +29,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class ListProduitComponent implements OnInit {
   pr: produit[];
+  products: produit[]=[];
+  
   e: produit;
   id:number;
   panelOpenState = false;
@@ -56,13 +58,23 @@ export class ListProduitComponent implements OnInit {
 
   LibelleArticle:String="";
   ngOnInit() {
-    this.pr = this.produitservice.produits;}
-    Delete(id:number)
+    //this.pr = this.produitservice.produits;
+    this.produitservice.getProducts().subscribe(
+      data => this.products = data
+    )
+  }
+  deleteProduct(id:number){
+    this.produitservice.deleteProduct(id).subscribe(
+      () => this.products = this.products.filter(p => p.id != id),
+      ()=> this.ngOnInit()
+    )
+  }
+    /*Delete(id:number)
     {
 
       this.pr = this.produitservice.DeleteProduit(id);
 
-    }
+    }*/
     //console.log(this.idChose);
   }
 

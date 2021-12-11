@@ -15,14 +15,14 @@ export class AjouterComponent implements OnInit {
   produits = [];
   title = "Ajouter Article :";
 
-  id: number;
-  libelle = "";
-  description = "";
-  image = "";
-  prix: number;
-  nbStock: number;
-  date: Date = new Date("1999-01-01");
-  stock: boolean;
+  _id: number;
+  _libelle = "";
+  _description = "";
+  _image = "";
+  _prix: number;
+  _nbStock: number;
+  _date: Date = new Date("1999-01-01");
+  _stock: boolean;
 
   indeterminate = false;
   labelPosition = "after";
@@ -32,36 +32,52 @@ export class AjouterComponent implements OnInit {
   action2: string = "";
   submit = false;
   //pr = new produit(this.id, this.libelle,this.description, this.image, this.prix ,this.nbStock, this.stock, this.date )
+  productF= new produit(0,'','','',0,0,false,this._date);
+  errorMsg = '';
 
+  constructor(
+    private produitsservice: ProduitService,
+    private router: Router,
+    private _snackBar: MatSnackBar
+  ) {}
   ngOnInit() {
     //this.produits = this._produits.produits;
   }
 
-  onSubmit(f: NgForm) {
+  onSubmit() {
+    console.log(this.productF);
+    this.produitsservice.enroll(this.productF).subscribe(
+      data => console.log('Success ! ', data),
+      error => this.errorMsg = error.statusText
+    )
+
+
+    /*
     const verif: boolean = this.produitsservice.addProduit(
-      this.id,
-      this.libelle,
-      this.description,
-      "assets/" + this.image,
-      this.prix,
-      this.nbStock,
-      this.stock,
-      this.date
+      this._id,
+      this._libelle,
+      this._description,
+      "assets/" + this._image,
+      this._prix,
+      this._nbStock,
+      this._stock,
+      this._date
     );
     if (verif) {
       this.message = "Votre nouveau produit a bien été ajouté";
     } else {
       this.message = "Le produit  existe déjà »";
     }
-    this.submit = true;
+    this.submit = true;*/
   }
-  constructor(
-    private produitsservice: ProduitService,
-    private router: Router,
-    private _snackBar: MatSnackBar
-  ) {}
+
   openSnackBar(message: string, action2: string) {
     this._snackBar.open(message + "Has been added Successfully!", action2, {
+      duration: 2000
+    });
+  }
+  openSnackBarError(message: string, ) {
+    this._snackBar.open( "errorrr", message, {
       duration: 2000
     });
   }

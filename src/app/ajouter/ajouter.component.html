@@ -2,59 +2,24 @@
   <div>
     <h1></h1>
   </div>
-  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <div class="alert-danger" *ngIf="errorMsg">
+    {{errorMsg}}
+  </div>
+  <form (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
     <mat-card class="z-depth-5">
+      {{f.form.value|json}}
+      <hr>
+      {{productF|json}}
       <mat-card-title>Adding a product </mat-card-title>
       <div class="login-container">
-        <mat-form-field>
-          <input [matAutocomplete]="auto"
-            matInput
-            placeholder="Image"
-            type="text"
-            id="image"
-            name="image"
-            [(ngModel)]="image"
-            class="form-control"
-            required
-            #im="ngModel"
-          /> </mat-form-field
-        ><br />
-
-        <mat-form-field>
-          <input
-            matInput
-            placeholder="Product Name"
-            type="text"
-            id="libelle"
-            name="libelle"
-            [(ngModel)]="libelle"
-            class="form-control"
-            required
-            #lib="ngModel"
-          /> </mat-form-field
-        ><br />
-        <mat-form-field>
-            <textarea
-              matInput
-              placeholder="Description"
-              type="text"
-              id="description"
-              name="description"
-              [(ngModel)]="description"
-              class="form-control"
-              required
-              #desc="ngModel"
-            ></textarea>
-            </mat-form-field
-          ><br />
         <mat-form-field>
           <input
             matInput
             placeholder="Product ID"
             type="number"
-            id="id"
-            name="id"
-            [(ngModel)]="id"
+            id="_id"
+            name="_id"
+            [(ngModel)]="productF._id"
             class="form-control"
             required
             #identif="ngModel"
@@ -63,39 +28,91 @@
         <mat-form-field>
           <input
             matInput
+            placeholder="Product Name"
+            type="text"
+            id="_libelle"
+            name="_libelle"
+            [(ngModel)]="productF._libelle"
+            class="form-control"
+            required
+            #lib="ngModel"
+          /> </mat-form-field
+        ><br />
+        <mat-form-field>
+          <textarea
+            matInput
+            placeholder="Description"
+            type="text"
+            id="_description"
+            name="_description"
+            [(ngModel)]="productF._description"
+            class="form-control"
+            required
+            #desc="ngModel"
+          ></textarea>
+          </mat-form-field
+        ><br />
+        <mat-form-field>
+          <input [matAutocomplete]="auto"
+            matInput
+            placeholder="Image"
+            type="text"
+            id="_image"
+            name="_image"
+            [(ngModel)]="productF._image"
+            class="form-control"
+            required
+            #im="ngModel"
+          /> </mat-form-field
+        ><br/>
+        <mat-form-field>
+          <input
+            matInput
             placeholder="Price"
             type="number"
-            id="prix"
-            name="prix"
-            [(ngModel)]="prix"
+            id="_prix"
+            name="_prix"
+            [(ngModel)]="productF._prix"
             class="form-control"
             required
             #pr="ngModel"
           /> </mat-form-field
         ><br />
         <mat-form-field>
-            <input
-              matInput
-              placeholder="Quantity"
-              type="number"
-              id="nbStock"
-              name="nbStock"
-              [(ngModel)]="nbStock"
-              class="form-control"
-              required
-              #quant="ngModel"
-            /> </mat-form-field
-          ><br />
+          <input
+            matInput
+            placeholder="Quantity"
+            type="number"
+            id="_nbStock"
+            name="_nbStock"
+            [(ngModel)]="productF._nbStock"
+            class="form-control"
+            required
+            #quant="ngModel"
+          /> </mat-form-field
+        ><br />
+        <mat-checkbox
+        class="example-margin"
+        name="_stock"
+        [(ngModel)]="productF._stock"
+        [(indeterminate)]="indeterminate"
+        [labelPosition]="labelPosition"
+        [disabled]="disabled"
+        >
+          In Stock
+        </mat-checkbox>
+        <br>
+        
         <mat-form-field>
           <input
             matInput
             [matDatepicker]="picker"
             placeholder="Stock Date"
-            [(ngModel)]="date"
-            name="date"
+            [(ngModel)]="productF._date"
+            name="_date"
             required
             #dt="ngModel"
-            id="date"
+            id="_date"
           />
           <mat-datepicker-toggle
             matSuffix
@@ -104,19 +121,9 @@
           <mat-datepicker #picker></mat-datepicker> </mat-form-field
         ><br />
 
-        <mat-checkbox
-        class="example-margin"
-        name="stock"
-        [(ngModel)]="stock"
-        [(indeterminate)]="indeterminate"
-        [labelPosition]="labelPosition"
-        [disabled]="disabled"
-        >
-          In Stock
-        </mat-checkbox>
-        <br>
+     
       </div>
-      <button mat-stroked-button [disabled]="f.invalid" (click)="openSnackBar(lib.value, identif.value)">submit</button> &nbsp;
+      <button mat-stroked-button [disabled]="f.form.invalid" >submit</button> &nbsp;
       <!--<div [hidden]="!submit">{{ message }}</div>-->
       <button mat-stroked-button type="reset" (click)="openSnackBarReset()">reset</button>
     </mat-card>
