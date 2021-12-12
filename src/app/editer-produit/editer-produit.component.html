@@ -1,21 +1,23 @@
 <app-nav-menu>
   <div>
-    <h1></h1>
+   
   </div>
-  <form action="" #f="ngForm">
+  <form  action="" #f="ngForm">
     <mat-card class="z-depth-5">
       <mat-card-title>Edit Product Info</mat-card-title>
-
+      <!--<p>{{products|json }}</p>
+      <p> {{productF|json}} </p>
+      -->
       <div class="login-container">
         <mat-form-field>
           <input
-            [matAutocomplete]="auto"
+            
             matInput
             placeholder="Image"
             type="text"
-            id="image"
-            name="image"
-            [(ngModel)]="produit.image"
+            id="_image"
+            name="_image"
+            [(ngModel)]="products._image"
             class="form-control"
             required
           /> </mat-form-field
@@ -25,9 +27,9 @@
             matInput
             placeholder="Product Name"
             type="text"
-            id="libelle"
-            name="libelle"
-            [(ngModel)]="produit.libelle"
+            id="_libelle"
+            name="_libelle"
+            [(ngModel)]="products._libelle"
             class="form-control"
             required
           /> </mat-form-field
@@ -37,9 +39,9 @@
             matInput
             placeholder="Description"
             type="text"
-            id="description"
-            name="description"
-            [(ngModel)]="produit.description"
+            id="_description"
+            name="_description"
+            [(ngModel)]="products._description"
             class="form-control"
             required
           ></textarea> </mat-form-field
@@ -50,14 +52,14 @@
             matInput
             placeholder="ID"
             type="number"
-            id="id"
-            name="id"
-            [(ngModel)]="id"
+            id="_id"
+            name="_id"
+            [(ngModel)]="products._id"
             class="form-control"
             required
           />
           <mat-error>
-            The ID of the product -> {{ produit.libelle }} is {{ produit.id }}
+            The ID of the product -> {{ products._libelle }} is {{_id}}
           </mat-error>
         </mat-form-field>
         <div [hidden]="!submitted">
@@ -69,9 +71,9 @@
             matInput
             placeholder="Price"
             type="number"
-            id="prix"
-            name="prix"
-            [(ngModel)]="produit.prix"
+            id="_prix"
+            name="_prix"
+            [(ngModel)]="products._prix"
             class="form-control"
             required
           /> </mat-form-field
@@ -81,9 +83,9 @@
             matInput
             placeholder="Quantity"
             type="number"
-            id="nbStock"
-            name="nbStock"
-            [(ngModel)]="produit.nbStock"
+            id="_nbStock"
+            name="_nbStock"
+            [(ngModel)]="products._nbStock"
             class="form-control"
             required
           /> </mat-form-field
@@ -93,10 +95,10 @@
             matInput
             [matDatepicker]="picker"
             placeholder="Stock Date"
-            [(ngModel)]="produit.date"
-            name="date"
+            [(ngModel)]="products._date"
+            name="_date"
             required
-            id="date"
+            id="_date"
           />
           <mat-datepicker-toggle
             matSuffix
@@ -109,7 +111,7 @@
         <mat-checkbox
           class="example-margin"
           matInput
-          [(ngModel)]="produit.stock"
+          [(ngModel)]="products._stock"
           name="stock"
 
         >
@@ -120,7 +122,7 @@
       <button
         mat-stroked-button
         [disabled]="f.invalid"
-        (click)="editerProduit()"
+        (click)="onEditProduct(products._id)"
         (click)="openSnackBar()"
       >
         Editer

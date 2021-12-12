@@ -10,7 +10,7 @@
       class="align-text"
       [(ngModel)]="LibelleArticle"
     />
-    <span matSuffix> <mat-icon>search</mat-icon></span>
+    <span matSuffix> <mat-icon id="search_icon">search</mat-icon></span>
   </mat-form-field>
 </div>
 
@@ -77,7 +77,7 @@
               <mat-icon class="mat-iconDsize">attach_money</mat-icon>
               <em> {{ e._prix }}€ ({{ e.prix | toTnd | number }} tnd)</em>
             </p>
-            <div *ngIf="e.stock; else BlocElse">
+            <div *ngIf="e._stock; else BlocElse">
               <mat-icon class="mat-iconDsize " [ngStyle]="{ color: 'green' }"
                 >check_circle</mat-icon
               >En Stock ({{ e._nbStock }})

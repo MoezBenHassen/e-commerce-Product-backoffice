@@ -9,6 +9,7 @@ const URL = "http://localhost:1234/products/getProducts";
 const URL_POST = "http://localhost:1234/products/create";
 const URL_DELETE = "http://localhost:1234/products/";
 const URL_UPDATE = "http://localhost:1234/products/";
+const URL_ID = "http://localhost:1234/products/";
 
 @Injectable({
   providedIn: "root"
@@ -28,7 +29,7 @@ export class ProduitService {
     //id, name, description, image path, price, nb in stock, in stock or not, date
     new produit(
       12345,
-      "The Chita Single Grain",
+      "STATIC The Chita Single Grain",
       "Japanese single grain whisky from the Chita distillery, one of the selection of fantastic distilleries owned by Suntory. This is their main expression - a whisky matured in a combination of Sherry, bourbon and (interestingly) wine casks. Good whisky for the summer months.",
       "assets/TheChitaSingleGrain.jpg",
       50.2,
@@ -38,7 +39,7 @@ export class ProduitService {
     ),
     new produit(
       18345,
-      "The Hakushu Single Malt",
+      "STATIC The Hakushu Single Malt",
       "From the Hakushu distillery in the foothills of Mount Kaikomagatake comes their Distiller's Reserve single malt whisky, a no-age-statement expression, that captures the smoky, herbaceous characteristics of their whiskies. Both lightly-peated and heavily-peated malts were used for this complex and deeply enjoyable whisky. One of two Spring 2014 release from Suntory.",
       "assets/TheHakushuSingleMalt.jpg",
       50.52,
@@ -48,7 +49,6 @@ export class ProduitService {
     )
   ]; 
 
-  
   constructor(private http:HttpClient) {}
   
   errorHandler(error:HttpErrorResponse){
@@ -60,6 +60,7 @@ export class ProduitService {
   addProducts(product:produit):Observable<produit>{
     return this.http.post<produit>(URL_POST, product);
   }
+  //addProducts >>>
   enroll(product:produit):Observable<produit>{
     return this.http.post<any>(URL_POST, product)
             .pipe(catchError(this.errorHandler))
@@ -67,8 +68,11 @@ export class ProduitService {
   deleteProduct(id:number){
     return this.http.delete(URL_DELETE+"/"+id+"/delete");
   }
-  updateProduct(id:number, product:produit):Observable<produit>{
-    return this.http.put<produit>(URL_UPDATE+"/"+id+"/delete", product);
+  updateProduct(id:number, product:produit[]):Observable<produit>{
+    return this.http.put<produit>(URL_UPDATE+"/"+id+"/update", product);
+  }
+  getById (id:number):Observable<produit[]>{
+    return this.http.get<produit[]>(URL_ID+"/"+id);
   }
 
 
@@ -82,7 +86,7 @@ export class ProduitService {
     }
     return null;
   }
-
+/*
   public addProduit(id: number, libelle: string,description: string, image: string, prix: number,nbStock:number, stock: boolean, date: Date): boolean {
     if (this.getProduitId(id)==null) {
       const nouveau: produit = new produit(id, libelle,description, image, prix,nbStock, stock, date);
@@ -134,7 +138,7 @@ export class ProduitService {
   getAllProduits():produit[]{
     return this.produits;
   }
-
+*/
 }
 
 /* LOGIN PART */

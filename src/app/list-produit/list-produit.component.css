@@ -13,8 +13,13 @@
   padding: 0;
 }
   #searchBar{
-    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*margin-left: 10px;
+    border: solid red 2px;*/
   }
+
   .searchBar{
     width: 80%;
   }

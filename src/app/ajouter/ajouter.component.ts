@@ -21,7 +21,7 @@ export class AjouterComponent implements OnInit {
   _image = "";
   _prix: number;
   _nbStock: number;
-  _date: Date = new Date("1999-01-01");
+  _date: Date = new Date("2021-01-01");
   _stock: boolean;
 
   indeterminate = false;
@@ -48,7 +48,9 @@ export class AjouterComponent implements OnInit {
     console.log(this.productF);
     this.produitsservice.enroll(this.productF).subscribe(
       data => console.log('Success ! ', data),
-      error => this.errorMsg = error.statusText
+      error => {
+        this.errorMsg = error.statusText
+      }
     )
 
 
@@ -72,7 +74,7 @@ export class AjouterComponent implements OnInit {
   }
 
   openSnackBar(message: string, action2: string) {
-    this._snackBar.open(message + "Has been added Successfully!", action2, {
+    this._snackBar.open(message + " Has been added Successfully!", action2, {
       duration: 2000
     });
   }
